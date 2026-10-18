@@ -4,7 +4,7 @@
 
 作者：**3.1415926** · 联系与商业授权：[mqx74123@gmail.com](mailto:mqx74123@gmail.com)
 
-本目录是 **v0.6.1-rc.1 发布候选源码**，尚未在 GitHub 发布。图形界面版本与底层计算引擎版本分别管理；底层 `poi-audit-kit` 仍为 0.3.0。
+本仓库已公开 **v0.6.1-rc.1 预发布源码**。项目地址：[mqx74123-cloud/research-studio](https://github.com/mqx74123-cloud/research-studio)。图形界面版本与底层计算引擎版本分别管理；底层 `poi-audit-kit` 仍为 0.3.0。
 
 从 Excel / CSV 导入数据，选择图形和字段，在本机生成 PNG、SVG、PDF。运行不需要 API Key、外部服务、在线底图或 CDN，界面只监听本机 `127.0.0.1`。仓库附带合成示例，不含作者的真实科研数据。
 
@@ -25,7 +25,14 @@
 
 ## 使用
 
-普通 Windows 用户：待维护者发布后，在仓库的 Releases 页面下载独立 Windows 离线包。**GitHub 的 Download ZIP 是源码，未包含 Python 运行环境，不能当作免安装软件。** 当前候选目录尚未提供新的非商业版 Windows 离线包。
+Windows 10/11 x64 用户：前往 [Releases](https://github.com/mqx74123-cloud/research-studio/releases)，在对应版本的 **Assets** 中选择 `POI-Studio-v0.6.1-rc.1-Windows-x64.zip`。离线包已完成本机验证，若页面尚无此附件，表示维护者尚未上传。
+
+1. 将整个 ZIP 解压到有写入权限的目录，不要直接在压缩包内启动。
+2. 双击 `启动制图界面-Windows.bat`，浏览器会打开本机界面。
+3. 导入 Excel/CSV，第二步选择图形，核对字段后生成并导出。
+4. 关闭启动窗口即可停止服务；数据、方案和结果保存在本机 `gui-work/`。
+
+离线包自带 Python 和依赖，无需另装 Python、Node.js，也不需要 API Key。**GitHub 的 Download ZIP 和 Release 自动生成的 Source code ZIP 是源码，不包含运行环境。**
 
 开发者：Python 3.10 或更高版本。在源码目录创建虚拟环境，安装依赖后运行：
 
@@ -56,7 +63,7 @@ node tests_gui/test_research_ui.js
 
 Node.js 仅供前端开发测试，不是普通用户使用软件的依赖。测试使用合成数据与临时目录。
 
-近期基线验证：133 项 GUI / 后端检查、53 项统计检查以及三组 Node 检查通过；5 个使用 pytest 的旧模块在该离线环境未执行。GitHub Actions 配置覆盖 Python 与 Node 测试，但**尚未在远端运行，不能把配置存在当作 CI 已通过**。具体范围见 [验证说明](docs/VALIDATION.md)。
+2026-10-18：[GitHub Actions 第 4 次检查](https://github.com/mqx74123-cloud/research-studio/actions/runs/39102338520)的 Windows 与 Ubuntu 任务均通过，覆盖完整 Python 测试及三组 Node 检查。新版 Windows 离线包另以自带解释器通过 186 项 Python 检查、三组 Node 检查、八类图形导出及中文/空格路径启动检查。具体范围和限制见 [验证说明](docs/VALIDATION.md)。
 
 ## 许可与引用
 

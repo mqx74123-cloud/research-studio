@@ -1,26 +1,29 @@
 # Third-party notices / 第三方声明
 
-项目自有材料的许可见 LICENSE 与 LICENSE_POLICY.md。新许可不会覆盖或替换第三方的版权与许可证，也不会撤销旧版已授予的 MIT 权利。原项目归属信息和旧许可保存在 NOTICE 与 LICENSES/PRIOR-MIT.txt。
+项目自有材料的许可见 LICENSE 与 LICENSE_POLICY.md。新许可不会覆盖第三方的版权或许可证，也不会撤销旧版已授予的 MIT 权利。历史声明在 NOTICE 与 LICENSES/PRIOR-MIT.txt。
 
-## 源码仓库
+## 源码与 Windows 离线包
 
-本候选源码不附带 Python 解释器、依赖 wheel、第三方字体或真实研究数据。依赖通过 pyproject.toml 声明，安装后的第三方包仍遵循各自许可。
+源码仓库不附带运行环境。Windows 离线包附带解释器与依赖，并保留原始许可文件；在包内可查看 `OFFLINE-DEPENDENCIES.json` 的实际版本清单、`LICENSES/THIRD_PARTY/` 的许可汇总，以及各组件原目录的声明。
 
-| 组件 | 主要许可 / 说明 |
+| 组件 | 随包许可与说明 |
 |---|---|
-| Python（仅将来的离线发行包） | Python 自身及随附组件的许可 |
-| NumPy | BSD 及随附组件声明 |
-| Matplotlib | Matplotlib 许可及随附字体/组件声明 |
-| Shapely | BSD；其二进制发行中 GEOS 有独立许可义务 |
-| pyproj | MIT；PROJ、数据文件等有独立声明 |
-| openpyxl | MIT |
-| Pillow、fonttools 等传递依赖 | 以所用版本包内许可为准 |
-| pytest、setuptools、build、Node.js | 开发/测试工具，各自许可 |
+| Python 3.12.14 | `runtime/LICENSE.txt`；汇总目录另附 Python 官方 History and License，含 OpenSSL、libffi、zlib、bzip2 等组件说明 |
+| Tcl/Tk 8.6.12 | 原 tk 声明及上游 Tcl/Tk `license.terms` |
+| NumPy、OpenBLAS、LAPACK | 原 NumPy 许可汇总及随附组件声明；包括 GCC Runtime Library Exception |
+| Matplotlib、DejaVu、STIX | 保留 Matplotlib 及随附字体的许可证；不额外打包 Windows 系统中文字体 |
+| Shapely 2.1.2、GEOS 3.13.1 | Shapely BSD；GEOS LGPL-2.1；见下文源码与替换说明 |
+| pyproj、PROJ 及数据库 | 保留 `LICENSE`、`LICENSE_proj` 和随附数据声明 |
+| openpyxl、Pillow、fonttools 等 | 保留实际包内版权、许可及第三方组件声明 |
+| certifi | MPL-2.0；Python 源文件及证书数据以源码形式保存在 `runtime/Lib/site-packages/certifi/` |
+| Microsoft VC runtime | 保留原始未修改运行库和随附 MSVC 声明；不将其重新许可为 PolyForm |
 
-## Windows 离线发行包
+pytest、build、Node.js 是开发/测试工具，Windows 离线包不要求用户安装它们。
 
-离线包会附带解释器和依赖，与本源码包不同。不能复用旧声明中的“没有附带依赖”描述。打包时应保留所有实际组件版权、许可证、版本清单，并核对 GEOS 等组件有关再分发、对应源码或获取方式的要求。**单独列出软件名称或附上许可证，不等于完成全部二进制再分发义务。**
+## GEOS 对应源码与库替换
 
-当前提供的是源码候选；新的非商业版离线包应在完成该核对后另建。不要把此前带有 MIT 许可证的旧 ZIP 改名后当作新的非商业包发布。
+离线包的 `THIRD_PARTY_SOURCES/` 包含 GEOS 3.13.1 完整上游源码、Shapely 2.1.2 源码及构建脚本、来源 URL 与 SHA-256 清单。Shapely/GEOS 的六个 DLL/PYD 文件已与 PyPI 官方 Windows wheel 比对一致，未做本项目修改。
 
-本项目使用 AI 辅助编写。该事实不构成第三方素材权利保证，使用者仍需核对输入数据、边界与字体的来源。
+GEOS 以可替换的共享 DLL 保存在 `runtime/Lib/site-packages/shapely.libs/`。本项目的非商业许可不限制第三方库原许可授予的权利，也不禁止为修改这些库及调试相关修改而进行其许可允许的逆向工程。详细重建和替换说明见离线包内 `THIRD_PARTY_SOURCES/README.md`；不得将第三方源码单独重新许可为 PolyForm。
+
+本项目使用 AI 辅助编写。输入数据、边界和用户选择的字体仍需使用者确认有权使用。
