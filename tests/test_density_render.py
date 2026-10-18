@@ -65,7 +65,7 @@ def test_actual_atlas_density_cli_manifest_and_offline_links(tmp_path):
     result=invoke('run','--config',path,'--output',out,cwd=tmp_path)
     assert result.returncode==0,result.stderr
     m=json.loads((out/'manifest.json').read_text())
-    assert m['version']=='0.2.0'
+    assert m['version']=='0.3.0'
     assert m['counts']['kept']==2
     assert m['rendering']['density']['method']['units']=='points/km²'
     assert m['rendering']['density']['style']=='multimodal_paper'
