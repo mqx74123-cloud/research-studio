@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "title": "POI 空间、审计与核密度图谱",
+  "synthetic": true,
+  "inputs": [
+    {
+      "name": "synthetic",
+      "namespace": "synthetic_city_20261005",
+      "path": "synthetic_poi_raw.csv",
+      "encoding": "utf-8-sig",
+      "fields": {
+        "id": "id",
+        "name": "name",
+        "category": "category",
+        "x": "lon",
+        "y": "lat",
+        "date": "source_update"
+      },
+      "crs": "EPSG:4326",
+      "coordinate_convention": "WGS84",
+      "date_format": "%Y-%m-%d"
+    }
+  ],
+  "boundary": {
+    "path": "synthetic_boundary.geojson",
+    "crs": "EPSG:4326",
+    "coordinate_convention": "WGS84"
+  },
+  "category_mapping": {
+    "购物服务": "购物服务",
+    "餐饮服务": "餐饮服务",
+    "生活服务": "生活服务",
+    "休闲游憩": "休闲游憩",
+    "科教服务": "科教服务",
+    "医疗服务": "医疗服务",
+    "文化服务": "文化服务"
+  },
+  "unknown_category": "未映射",
+  "reference_date": "2026-09-30",
+  "stale_after_days": 365,
+  "candidate_decimals": 6,
+  "map_crs": "EPSG:32650",
+  "font_family": [
+    "Noto Sans CJK JP"
+  ],
+  "atlas": {
+    "enabled": true,
+    "style": "premium",
+    "language": "zh",
+    "categories": [
+      "购物服务",
+      "餐饮服务",
+      "生活服务",
+      "休闲游憩",
+      "科教服务",
+      "医疗服务",
+      "文化服务",
+      "未映射"
+    ],
+    "categories_per_page": 8
+  },
+  "context": {
+    "path": "generated_context_utm.geojson",
+    "crs": "EPSG:32650",
+    "coordinate_convention": "CRS_NATIVE",
+    "layer_field": "layer"
+  },
+  "kde": {
+    "enabled": true,
+    "bandwidth_m": 220,
+    "cell_size_m": 30,
+    "categories": [
+      "购物服务",
+      "餐饮服务",
+      "生活服务",
+      "休闲游憩",
+      "科教服务",
+      "医疗服务",
+      "文化服务",
+      "未映射"
+    ],
+    "include_outside_boundary": false,
+    "total_scale": "separate",
+    "contours": true,
+    "max_grid_cells": 1000000,
+    "chunk_memory_mb": 64,
+    "max_kernel_evaluations": 250000000
+  }
+}

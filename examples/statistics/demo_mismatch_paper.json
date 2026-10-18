@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "kind": "statistical_plots",
+  "title": "从关系到分布：三种统计图式",
+  "synthetic": true,
+  "style": "mismatch_paper",
+  "language": "zh",
+  "font_family": [
+    "Noto Sans CJK SC",
+    "Microsoft YaHei",
+    "DejaVu Sans"
+  ],
+  "input": {
+    "path": "metrics.csv",
+    "encoding": "utf-8-sig",
+    "record_unit": "一条虚构样本观测（每行一条；无真实街段）",
+    "id_field": "observation_id"
+  },
+  "plots": [
+    {
+      "id": "scatter",
+      "type": "scatter",
+      "title": "01  散点关系 · 每个点对应一条观测",
+      "x": {
+        "field": "supply_example",
+        "label": "供给示例分数",
+        "unit": "虚构分数，0–100"
+      },
+      "y": {
+        "field": "walk_example",
+        "label": "步行条件示例分数",
+        "unit": "虚构分数，0–100"
+      },
+      "group_field": "sample_group",
+      "group_order": [
+        "样例组 A",
+        "样例组 B",
+        "样例组 C"
+      ],
+      "transform": "raw",
+      "fit": "ols",
+      "correlation": "spearman",
+      "labels": false
+    },
+    {
+      "id": "raincloud",
+      "type": "half_violin",
+      "title": "02  半小提琴 · 分布、箱线与原始点",
+      "value": {
+        "field": "walk_example",
+        "label": "步行条件示例分数",
+        "unit": "虚构分数，0–100"
+      },
+      "group_field": "sample_group",
+      "group_order": [
+        "样例组 A",
+        "样例组 B",
+        "样例组 C"
+      ],
+      "transform": "raw",
+      "jitter_seed": 1729
+    },
+    {
+      "id": "quadrant",
+      "type": "quadrant",
+      "title": "03  四象限 · 阈值分组与样本计数",
+      "x": {
+        "field": "supply_example",
+        "label": "供给示例分数",
+        "unit": "虚构分数，0–100"
+      },
+      "y": {
+        "field": "walk_example",
+        "label": "步行条件示例分数",
+        "unit": "虚构分数，0–100"
+      },
+      "transform": "raw",
+      "thresholds": {
+        "x": {
+          "method": "median"
+        },
+        "y": {
+          "method": "median"
+        }
+      },
+      "quadrant_labels": {
+        "Q1": "X 高 · Y 高",
+        "Q2": "X 高 · Y 低",
+        "Q3": "X 低 · Y 高",
+        "Q4": "X 低 · Y 低"
+      },
+      "labels": false
+    }
+  ]
+}

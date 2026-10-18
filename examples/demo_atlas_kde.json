@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "title": "A traceable picture of place",
+  "synthetic": true,
+  "inputs": [
+    {
+      "name": "alpha",
+      "namespace": "provider_alpha",
+      "path": "provider_alpha.csv",
+      "encoding": "utf-8-sig",
+      "fields": {
+        "id": "poi_id",
+        "name": "name",
+        "category": "type",
+        "x": "lon",
+        "y": "lat",
+        "date": "observed"
+      },
+      "crs": "EPSG:4326",
+      "coordinate_convention": "WGS84",
+      "date_format": "%Y-%m-%d"
+    },
+    {
+      "name": "beta",
+      "namespace": "provider_beta",
+      "path": "provider_beta.csv",
+      "encoding": "utf-8-sig",
+      "fields": {
+        "id": "record",
+        "name": "label",
+        "category": "kind",
+        "x": "x",
+        "y": "y",
+        "date": "date"
+      },
+      "crs": "EPSG:4326",
+      "coordinate_convention": "WGS84",
+      "date_format": "%Y-%m-%d"
+    }
+  ],
+  "boundary": {
+    "path": "boundary.geojson",
+    "crs": "EPSG:4326",
+    "coordinate_convention": "WGS84"
+  },
+  "category_mapping": {
+    "Cafe": "Food & drink",
+    "Market": "Retail",
+    "Clinic": "Health",
+    "School": "Education",
+    "Park": "Open space",
+    "Culture": "Culture"
+  },
+  "unknown_category": "Unmapped",
+  "reference_date": "2026-09-30",
+  "stale_after_days": 365,
+  "candidate_decimals": 6,
+  "map_crs": "EPSG:32650",
+  "font_family": [
+    "DejaVu Sans"
+  ],
+  "atlas": {
+    "enabled": true,
+    "language": "en"
+  },
+  "kde": {
+    "enabled": true,
+    "bandwidth_m": 200,
+    "cell_size_m": 50,
+    "total_scale": "shared",
+    "contours": false
+  }
+}
