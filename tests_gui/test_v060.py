@@ -39,7 +39,7 @@ class ResearchTests(unittest.TestCase):
   moved=self.base/'moved';shutil.copytree(self.app.work,moved)
   self.tmp_source=self.app.work
   restored=App(moved);loaded=load_project(restored,{'id':p['id']});c,_=build_config(loaded['request'],restored.uploads)
-  self.assertTrue(Path(c['input']['path']).is_relative_to(moved));self.assertEqual(len(prepare(c,self.base)['rows']),5)
+  self.assertTrue(Path(c['input']['path']).resolve().is_relative_to(moved.resolve()));self.assertEqual(len(prepare(c,self.base)['rows']),5)
  def test_complete_job_and_restart_history(self):
   job=self.app.submit(self.request('forest'));deadline=time.time()+90
   while time.time()<deadline and not (self.app.jobs[job['id']]['folder']/'status.json').exists():time.sleep(.05)
