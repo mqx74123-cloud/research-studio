@@ -1,0 +1,36 @@
+name: Tests
+
+on: [push, pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    env:
+      MPLBACKEND: Agg
+      PROJ_NETWORK: "OFF"
+      PYTHONUTF8: "1"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - run: python -m pip install -e ".[gui,dev]"
+      - run: python -m pytest tests tests_gui -q
+      - run: node tests_gui/test_ui_states.js
+      - run: node tests_gui/test_extent_preview_ui.js
+      - run: node tests_gui/test_research_ui.js
