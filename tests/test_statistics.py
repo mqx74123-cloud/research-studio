@@ -50,7 +50,7 @@ class StatisticsTests(unittest.TestCase):
         path.write_text(json.dumps(config), encoding='utf-8-sig')
         os.chdir(tmp_path)
         loaded, actual_base = load_statistics_config(path)
-        assert loaded == config and actual_base == base
+        assert loaded == config and actual_base == base.resolve()
         bundle = prepare_statistics(loaded, actual_base)
         assert bundle['input']['sha256'] == hashlib.sha256((base / 'observations.csv').read_bytes()).hexdigest()
         assert bundle['input']['rows'] == 2
